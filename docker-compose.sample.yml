@@ -314,6 +314,18 @@ services:
 #      - "${LOGSTASH_HOST_PORT_C}:9600"
 #      - "${LOGSTASH_HOST_PORT_S}:5044"
 
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce
+    privileged: true
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - "${PORTAINER_HOST_PORT}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_DIR}/portainer:/data
+
 
 networks:
   default:
